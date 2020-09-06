@@ -1,0 +1,8 @@
+F:\VS_2019_Projects\promotion_app\PromotionEngine\ShoppingCart\bin\Debug\netstandard2.0\MyShoppingCart.deps.json
+F:\VS_2019_Projects\promotion_app\PromotionEngine\ShoppingCart\bin\Debug\netstandard2.0\MyShoppingCart.dll
+F:\VS_2019_Projects\promotion_app\PromotionEngine\ShoppingCart\bin\Debug\netstandard2.0\MyShoppingCart.pdb
+F:\VS_2019_Projects\promotion_app\PromotionEngine\ShoppingCart\obj\Debug\netstandard2.0\MyShoppingCart.AssemblyInfoInputs.cache
+F:\VS_2019_Projects\promotion_app\PromotionEngine\ShoppingCart\obj\Debug\netstandard2.0\MyShoppingCart.AssemblyInfo.cs
+F:\VS_2019_Projects\promotion_app\PromotionEngine\ShoppingCart\obj\Debug\netstandard2.0\MyShoppingCart.csproj.CoreCompileInputs.cache
+F:\VS_2019_Projects\promotion_app\PromotionEngine\ShoppingCart\obj\Debug\netstandard2.0\MyShoppingCart.dll
+F:\VS_2019_Projects\promotion_app\PromotionEngine\ShoppingCart\obj\Debug\netstandard2.0\MyShoppingCart.pdb
