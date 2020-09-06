@@ -1,6 +1,7 @@
 ﻿using System;
 using Moq;
 using MyShoppingCart;
+using MyShoppingCart.Model;
 using NUnit.Framework;
 
 namespace ShoppingCart_Test
@@ -18,7 +19,7 @@ namespace ShoppingCart_Test
         [Test]
         public void mock_test_add_to_cart()
         {
-            Mock<IProduct> mockProduct = new Mock<IProduct>();
+            Mock<Product> mockProduct = new Mock<Product>();
             _shoppingCart.AddToCart(mockProduct.Object);
             Assert.That(_shoppingCart.Items.Count,Is.EqualTo(1));
         }
@@ -27,9 +28,11 @@ namespace ShoppingCart_Test
         [Test]
         public void test_checkout()
         {            
-            var ex = Assert.Throws<NotImplementedException>(() => _shoppingCart.Checkout());
+            var ex = Assert.Throws<NotImplementedException>(() => _shoppingCart.CheckOut());
             Assert.That(ex.Message, Is.EqualTo("The method or operation is not implemented."));
         }
+
+
 
     }
 }
