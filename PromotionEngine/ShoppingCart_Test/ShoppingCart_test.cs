@@ -3,6 +3,7 @@ using Moq;
 using MyShoppingCart;
 using MyShoppingCart.Model;
 using NUnit.Framework;
+using ShoppingCart.Discounts;
 
 namespace ShoppingCart_Test
 {
@@ -13,7 +14,8 @@ namespace ShoppingCart_Test
         [SetUp]
         public void initial_setup()
         {
-            _shoppingCart = new ShoppingCart();
+            _shoppingCart = new MyShoppingCart.ShoppingCart();
+            _shoppingCart.AddPromotionsToCartItems(new PromotionOnProductA());
         }
 
         [Test]
@@ -36,6 +38,15 @@ namespace ShoppingCart_Test
             Assert.That(_shoppingCart.CheckOut(), Is.EqualTo(pricePerUnit));
         }
 
+        [Test]
+        public void test_3A_at_130()
+        {
+            _shoppingCart.AddToCart(new Product { Sku = "A", Unitprice = 50 });
+            _shoppingCart.AddToCart(new Product { Sku = "A", Unitprice = 50 });
+            _shoppingCart.AddToCart(new Product { Sku = "A", Unitprice = 50 });
+
+            Assert.That(_shoppingCart.CheckOut(), Is.EqualTo(130));
+        }
 
 
 

@@ -1,4 +1,5 @@
 ﻿using MyShoppingCart.Model;
+using ShoppingCart.Discounts;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,6 +15,7 @@ namespace MyShoppingCart
         #region Methods
         void AddToCart(Product product);
         decimal CheckOut();
+        void AddPromotionsToCartItems(IPromotionStrategy promotion);
         #endregion
 
     }

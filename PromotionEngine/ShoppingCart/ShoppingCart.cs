@@ -1,4 +1,5 @@
 ﻿using MyShoppingCart.Model;
+using ShoppingCart.Discounts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,18 +11,20 @@ namespace MyShoppingCart
     {
         #region Private variables
         private readonly IList<Product> _items;
+        private IList<IPromotionStrategy> _promotions;
         #endregion
 
         #region Constructor
         public ShoppingCart()
         {
             _items = new List<Product>();
+            _promotions = new List<IPromotionStrategy>();
         }
 
         #endregion
 
         #region Public Properties
-        public IList<Product> Items 
+        public IList<Product> Items
         {
             get
             {
@@ -35,18 +38,33 @@ namespace MyShoppingCart
         {
             _items.Add(product);
         }
-
+        public void AddPromotionsToCartItems(IPromotionStrategy promotion)
+        {
+            _promotions.Add(promotion);
+        }
         public decimal CheckOut()
         {
-            var groupedItem = _items
-                .GroupBy(x => x.Sku)
-                .OrderBy(p => p.Key)
-                .ToDictionary(item => item.Key, itemCount => itemCount.Count());
+            try
+            {
+                var groupedItem = _items
+               .GroupBy(x => x.Sku)
+               .OrderBy(p => p.Key)
+               .ToDictionary(item => item.Key.ToLower(), itemCount => itemCount.Count());
 
-            decimal _total = groupedItem.Sum(p=>p.Value * _items.Where(i=>i.Sku==p.Key).FirstOrDefault().Unitprice);
-            
-            return _total;
+                decimal _total = 0;
+                foreach (var promotion in _promotions)
+                {
+                    _total += promotion.ApplyPromotion(_items, groupedItem);
+                }
+                return _total;
+            }
+            catch (Exception ex)
+            {
+                //Code for error log
+                return 0;
+            }
         }
+        
         #endregion
     }
 }
