@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace ShoppingCart.Discounts
 {
+    /// <summary>
+    /// Concrete implementation of promotion on item C
+    /// </summary>
     public class PromotionOnProductC : IPromotionStrategy
     {
         public decimal ApplyPromotion(IList<Product> products, IDictionary<string, int> groupedItem)

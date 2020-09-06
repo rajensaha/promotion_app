@@ -7,14 +7,20 @@ using System.Text;
 
 namespace MyShoppingCart
 {
+    /// <summary>
+    /// Concrete implementation of Shopping Cart
+    /// </summary>
     public class ShoppingCart : IShoppingCart
     {
         #region Private variables
+
         private readonly IList<Product> _items;
-        private IList<IPromotionStrategy> _promotions;
+        private readonly IList<IPromotionStrategy> _promotions;
+
         #endregion
 
         #region Constructor
+
         public ShoppingCart()
         {
             _items = new List<Product>();
@@ -24,6 +30,7 @@ namespace MyShoppingCart
         #endregion
 
         #region Public Properties
+
         public IList<Product> Items
         {
             get
@@ -31,10 +38,12 @@ namespace MyShoppingCart
                 return _items;
             }
         }
+
         #endregion
 
         #region Public Methods
-        public void AddToCart(Product product)
+
+        public void AddProductToCart(Product product)
         {
             _items.Add(product);
         }
@@ -52,6 +61,8 @@ namespace MyShoppingCart
                .ToDictionary(item => item.Key.ToLower(), itemCount => itemCount.Count());
 
                 decimal _total = 0;
+                
+                // Looping through each promotions to get final cart value.
                 foreach (var promotion in _promotions)
                 {
                     _total += promotion.ApplyPromotion(_items, groupedItem);
@@ -64,7 +75,7 @@ namespace MyShoppingCart
                 return 0;
             }
         }
-        
+
         #endregion
     }
 }
