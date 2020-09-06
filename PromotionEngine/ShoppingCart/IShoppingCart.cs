@@ -8,6 +8,7 @@ namespace MyShoppingCart
     {
         void AddToCart(IProduct product);
         decimal Checkout();
+        IList<IProduct> Items { get; }
 
     }
 }

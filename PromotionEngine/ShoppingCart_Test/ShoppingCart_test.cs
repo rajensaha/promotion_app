@@ -16,12 +16,14 @@ namespace ShoppingCart_Test
         }
 
         [Test]
-        public void test_add_to_cart()
+        public void mock_test_add_to_cart()
         {
             Mock<IProduct> mockProduct = new Mock<IProduct>();
-            var ex = Assert.Throws<NotImplementedException>(() => _shoppingCart.AddToCart(mockProduct.Object));
-            Assert.That(ex.Message, Is.EqualTo("The method or operation is not implemented."));
+            _shoppingCart.AddToCart(mockProduct.Object);
+            Assert.That(_shoppingCart.Items.Count,Is.EqualTo(1));
         }
+
+       
         [Test]
         public void test_checkout()
         {            

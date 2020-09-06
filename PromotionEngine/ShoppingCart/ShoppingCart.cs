@@ -6,10 +6,16 @@ namespace MyShoppingCart
 {
     public class ShoppingCart : IShoppingCart
     {
+        private readonly IList<IProduct> _items;
+        public ShoppingCart()
+        {
+            _items = new List<IProduct>();
+        }
+        public IList<IProduct> Items => _items;
 
         public void AddToCart(IProduct product)
         {
-            throw new NotImplementedException();
+            _items.Add(product);
         }
 
         public decimal Checkout()
