@@ -16,6 +16,9 @@ namespace ShoppingCart_Test
         {
             _shoppingCart = new MyShoppingCart.ShoppingCart();
             _shoppingCart.AddPromotionsToCartItems(new PromotionOnProductA());
+            _shoppingCart.AddPromotionsToCartItems(new PromotionOnProductB());
+            _shoppingCart.AddPromotionsToCartItems(new PromotionOnProductC());
+            _shoppingCart.AddPromotionsToCartItems(new PromotionOnProductD());
         }
 
         [Test]
@@ -48,7 +51,91 @@ namespace ShoppingCart_Test
             Assert.That(_shoppingCart.CheckOut(), Is.EqualTo(130));
         }
 
+        [Test]
+        public void test_2B_at_45()
+        {
+            _shoppingCart.AddToCart(new Product { Sku = "B", Unitprice = 30 });
+            _shoppingCart.AddToCart(new Product { Sku = "B", Unitprice = 30 });
 
+            Assert.That(_shoppingCart.CheckOut(), Is.EqualTo(45));
+        }
+
+        [Test]
+        public void test_1C_1D_AT_30()
+        {
+            _shoppingCart.AddToCart(new Product { Sku = "C", Unitprice = 20 });
+            _shoppingCart.AddToCart(new Product { Sku = "D", Unitprice = 15 });
+
+            Assert.That(_shoppingCart.CheckOut(), Is.EqualTo(30));
+        }
+
+        [Test]
+        public void test_2C_3D_price_after_discount()
+        {
+            _shoppingCart.AddToCart(new Product { Sku = "C", Unitprice = 20 });
+            _shoppingCart.AddToCart(new Product { Sku = "C", Unitprice = 20 });
+            _shoppingCart.AddToCart(new Product { Sku = "D", Unitprice = 15 });
+            _shoppingCart.AddToCart(new Product { Sku = "D", Unitprice = 15 });
+            _shoppingCart.AddToCart(new Product { Sku = "D", Unitprice = 15 });
+
+            Assert.That(_shoppingCart.CheckOut(), Is.EqualTo(75));
+        }
+
+        [Test]
+        public void test_3C_2D_price_after_discount()
+        {
+            _shoppingCart.AddToCart(new Product { Sku = "C", Unitprice = 20 });
+            _shoppingCart.AddToCart(new Product { Sku = "C", Unitprice = 20 });
+            _shoppingCart.AddToCart(new Product { Sku = "C", Unitprice = 20 });
+            _shoppingCart.AddToCart(new Product { Sku = "D", Unitprice = 15 });
+            _shoppingCart.AddToCart(new Product { Sku = "D", Unitprice = 15 });
+
+            Assert.That(_shoppingCart.CheckOut(), Is.EqualTo(80));
+        }
+
+        [Test]
+        public void test_scenario_A()
+        {
+            _shoppingCart.AddToCart(new Product { Sku = "A", Unitprice = 50 });
+            _shoppingCart.AddToCart(new Product { Sku = "B", Unitprice = 30 });
+            _shoppingCart.AddToCart(new Product { Sku = "C", Unitprice = 20 });
+            Assert.That(_shoppingCart.CheckOut(), Is.EqualTo(100));
+        }
+
+        [Test]
+        public void test_scenario_B()
+        {
+            _shoppingCart.AddToCart(new Product { Sku = "A", Unitprice = 50 });
+            _shoppingCart.AddToCart(new Product { Sku = "A", Unitprice = 50 });
+            _shoppingCart.AddToCart(new Product { Sku = "A", Unitprice = 50 });
+            _shoppingCart.AddToCart(new Product { Sku = "A", Unitprice = 50 });
+            _shoppingCart.AddToCart(new Product { Sku = "A", Unitprice = 50 });
+            _shoppingCart.AddToCart(new Product { Sku = "B", Unitprice = 30 });
+            _shoppingCart.AddToCart(new Product { Sku = "B", Unitprice = 30 });
+            _shoppingCart.AddToCart(new Product { Sku = "B", Unitprice = 30 });
+            _shoppingCart.AddToCart(new Product { Sku = "B", Unitprice = 30 });
+            _shoppingCart.AddToCart(new Product { Sku = "B", Unitprice = 30 });
+            _shoppingCart.AddToCart(new Product { Sku = "C", Unitprice = 20 });
+
+            Assert.That(_shoppingCart.CheckOut(), Is.EqualTo(370));
+        }
+
+        [Test]
+        public void test_scenario_C()
+        {
+            _shoppingCart.AddToCart(new Product { Sku = "A", Unitprice = 50 });
+            _shoppingCart.AddToCart(new Product { Sku = "A", Unitprice = 50 });
+            _shoppingCart.AddToCart(new Product { Sku = "A", Unitprice = 50 });
+            _shoppingCart.AddToCart(new Product { Sku = "B", Unitprice = 30 });
+            _shoppingCart.AddToCart(new Product { Sku = "B", Unitprice = 30 });
+            _shoppingCart.AddToCart(new Product { Sku = "B", Unitprice = 30 });
+            _shoppingCart.AddToCart(new Product { Sku = "B", Unitprice = 30 });
+            _shoppingCart.AddToCart(new Product { Sku = "B", Unitprice = 30 });
+            _shoppingCart.AddToCart(new Product { Sku = "C", Unitprice = 20 });
+            _shoppingCart.AddToCart(new Product { Sku = "D", Unitprice = 15 });
+
+            Assert.That(_shoppingCart.CheckOut(), Is.EqualTo(280));
+        }
 
     }
 }
