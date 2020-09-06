@@ -1,6 +1,7 @@
 ﻿using MyShoppingCart.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MyShoppingCart
@@ -37,7 +38,14 @@ namespace MyShoppingCart
 
         public decimal CheckOut()
         {
-            throw new NotImplementedException();
+            var groupedItem = _items
+                .GroupBy(x => x.Sku)
+                .OrderBy(p => p.Key)
+                .ToDictionary(item => item.Key, itemCount => itemCount.Count());
+
+            decimal _total = groupedItem.Sum(p=>p.Value * _items.Where(i=>i.Sku==p.Key).FirstOrDefault().Unitprice);
+            
+            return _total;
         }
         #endregion
     }

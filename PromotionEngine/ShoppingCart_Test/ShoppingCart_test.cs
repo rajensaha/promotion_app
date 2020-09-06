@@ -21,16 +21,21 @@ namespace ShoppingCart_Test
         {
             Mock<Product> mockProduct = new Mock<Product>();
             _shoppingCart.AddToCart(mockProduct.Object);
-            Assert.That(_shoppingCart.Items.Count,Is.EqualTo(1));
+            Assert.That(_shoppingCart.Items.Count, Is.EqualTo(1));
         }
 
-       
+
         [Test]
-        public void test_checkout()
-        {            
-            var ex = Assert.Throws<NotImplementedException>(() => _shoppingCart.CheckOut());
-            Assert.That(ex.Message, Is.EqualTo("The method or operation is not implemented."));
+        [TestCase("A", 50)]
+        [TestCase("B", 30)]
+        [TestCase("C", 20)]
+        [TestCase("D", 15)]
+        public void test_for_each_item_cost(string sku, decimal pricePerUnit)
+        {
+            _shoppingCart.AddToCart(new Product() { Sku = sku, Unitprice = pricePerUnit });
+            Assert.That(_shoppingCart.CheckOut(), Is.EqualTo(pricePerUnit));
         }
+
 
 
 
